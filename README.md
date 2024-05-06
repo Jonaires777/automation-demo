@@ -1,6 +1,6 @@
 # automation-demo
 
-## To run the demo, you need to install the driver for Chrome.
+## To run the demo, you need to install the driver for the Browser you use (Chrome, Firefox, Safari, etc.).
 ## For that you'll need see the version of your Browser and install the driver based on that
 
 ## Running poetry
