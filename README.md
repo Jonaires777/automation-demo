@@ -7,4 +7,4 @@
 ### run the command 'poetry install' to install the dependencies
 
 ## Running the project
-### After all the dependencies are installed, run the command 'command' to activate the bot
+### After all the dependencies are installed, run the command 'python <name>.py' to activate the bot
