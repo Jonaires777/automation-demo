@@ -54,4 +54,6 @@ new_message.send_keys("Hi, this is an automated message")
 send_email_button = driver.find_element(By.XPATH, "//button[@aria-label='Enviar']")
 send_email_button.click()
 
-driver.quit()
+''' We can quit the driver if we want '''
+
+'''driver.quit()'''
