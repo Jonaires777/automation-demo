@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import StaleElementReferenceException
+
 
 options = Options()
 """ Enabling execute the action without the parse certificate """
@@ -13,6 +15,9 @@ driver = webdriver.Chrome(options=options)
 """ Getting the url to enter outlook """
 driver.get('https://outlook.live.com/mail/0/?cobrandid=ab0455a0-8d03-46b9-b18b-df2f57b9e44c&nlp=1&RpsCsrfState=6d00a139-cf1a-9956-1f9c-9fa5ef8c7cb9&url=%2fowa%2f0%2f%3fcobrandid%253dab0455a0-8d03-46b9-b18b-df2f57b9e44c%2526nlp%253d1%2526RpsCsrfState%253d6d00a139-cf1a-9956-1f9c-9fa5ef8c7cb9')
 
+""" Setting selenium to wait 10 seconds before raising and exception """
+driver.implicitly_wait(60)  
+
 """ Login in Outlook """
 login = driver.find_element(By.XPATH, "//input[@name='loginfmt']")
 login.send_keys("ex4mple123@outlook.com")
@@ -22,10 +27,16 @@ password = driver.find_element(By.XPATH, "//input[@name='passwd']")
 password.send_keys("example123")
 enter_button = driver.find_element(By.XPATH, "//button[@id='idSIButton9']")
 enter_button.click()
+accept_button = driver.find_element(By.XPATH, "//button[@id='acceptButton']")
+accept_button.click()
 
 """ Accessing the button to send a new email """
-new_email_button = driver.find_element(By.XPATH, "//button[@aria-label='Novo Email']")
-new_email_button.click()
+try:
+    new_email_button = driver.find_element(By.XPATH, "//button[@aria-label='Novo email']")
+    new_email_button.click()
+except StaleElementReferenceException:
+    new_email_button = driver.find_element(By.XPATH, "//button[@aria-label='Novo email']")
+    new_email_button.click()
 
 """ Accessing the destinatary """
 new_destinatary = driver.find_element(By.XPATH, "//div[@aria-label='Para']")
