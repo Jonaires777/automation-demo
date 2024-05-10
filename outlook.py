@@ -62,6 +62,9 @@ random_message = random.choice(messages)
 
 options = Options()
 
+""" Using the headless mode in selenium """
+options.add_argument('--headless=new')
+
 """ Picking the random user agent and using as a valid u.a """
 options.add_argument(f"--user-agent={random_user_agent}")
 
@@ -77,6 +80,8 @@ driver = webdriver.Chrome(options=options)
 """ Getting the url to enter outlook """
 try:
     driver.get('https://outlook.live.com/mail/0/?cobrandid=ab0455a0-8d03-46b9-b18b-df2f57b9e44c&nlp=1&RpsCsrfState=6d00a139-cf1a-9956-1f9c-9fa5ef8c7cb9&url=%2fowa%2f0%2f%3fcobrandid%253dab0455a0-8d03-46b9-b18b-df2f57b9e44c%2526nlp%253d1%2526RpsCsrfState%253d6d00a139-cf1a-9956-1f9c-9fa5ef8c7cb9')
+    
+    print('Access to OutLook granted!')
 
     """ Setting selenium to wait 10 seconds before raising and exception """
     driver.implicitly_wait(10)  
@@ -93,6 +98,8 @@ try:
     accept_button = driver.find_element(By.XPATH, "//button[@id='acceptButton']")
     accept_button.click()
 
+    print('Login sucessfully done!')
+    
     """ Accessing the button to send a new email """
     try:
         new_email_button = driver.find_element(By.XPATH, "//button[@aria-label='Novo email']")
@@ -117,6 +124,7 @@ try:
     send_email_button = driver.find_element(By.XPATH, "//button[@aria-label='Enviar']")
     send_email_button.click()
 
+    print('Email sucessfully sent!')
 finally:
     time.sleep(5)
     
