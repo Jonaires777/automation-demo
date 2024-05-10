@@ -5,26 +5,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import StaleElementReferenceException
 
-user_agents = [
-    # Firefox
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0) Gecko/20100101 Firefox/91.0",
-    "Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0",
-    # Safari
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15",
-    "Mozilla/5.0 (iPad; CPU OS 14_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Mobile/15E148 Safari/604.1",
-    # Edge
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59",
-    # Opera
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 OPR/77.0.4054.277",
-    # Internet Explorer
-    "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko",
-    # Android
-    "Mozilla/5.0 (Linux; Android 11; Pixel 4a) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.120 Mobile Safari/537.36",
-    # iOS
-    "Mozilla/5.0 (iPhone; CPU iPhone OS 14_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1"
-]
-
 topics = [
     "Inspiring Quotes",
     "Tech Tips",
@@ -53,9 +33,6 @@ messages = [
     "The capacity of the human mind and body to adapt to all situations is infinite..."
 ]
 
-""" Choosing a random user agent """
-random_user_agent = random.choice(user_agents)
-
 random_topic = random.choice(topics)
 
 random_message = random.choice(messages)
@@ -63,10 +40,6 @@ random_message = random.choice(messages)
 options = Options()
 
 """ Using the headless mode in selenium """
-options.add_argument('--headless=new')
-
-""" Picking the random user agent and using as a valid u.a """
-options.add_argument(f"--user-agent={random_user_agent}")
 
 """ Enabling execute the action without the parse certificate """
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
