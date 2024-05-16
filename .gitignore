@@ -1,2 +1,5 @@
 # Ignore Poetry lock file
 poetry.lock
+
+# Ignore .env file
+.env
