@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 from handle_page_access import handle_page_access
 from handle_login import handle_page_login
+from handle_task import handle_task
 
 from utils import init_web_driver
 
@@ -15,5 +16,7 @@ def main():
     handle_page_access(browser, waiter)
 
     handle_page_login(browser, waiter)    
+    
+    handle_task(browser, waiter)
     
 main()
