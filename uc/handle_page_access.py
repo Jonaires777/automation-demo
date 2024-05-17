@@ -11,6 +11,12 @@ def handle_page_access(browser: Chrome, waiter: WebDriverWait):
     
     waiter.until(
         expected_conditions.visibility_of_element_located(
+            (By.XPATH, '//*[@id="barra-sso"]')
+        )
+    ).click()
+    
+    waiter.until(
+        expected_conditions.visibility_of_element_located(
             (By.XPATH, LOGIN_PAGE_TITLE_XPATH)
         )
     )
