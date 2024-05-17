@@ -3,3 +3,6 @@ poetry.lock
 
 # Ignore .env file
 .env
+
+# Ignore pycache
+uc/__pycache__/
