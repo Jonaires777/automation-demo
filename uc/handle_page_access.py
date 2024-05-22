@@ -4,19 +4,14 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 LOGIN_PAGE_TITLE_XPATH = "//*[@id='login-cpf']/h3"
-LOGIN_ULR = "https://sso.acesso.gov.br/login?client_id=www.gov.br&authorization_id=18f82acb672"
+LOGIN_ULR = "https://sso.acesso.gov.br/login"
 
-def handle_page_access(browser: Chrome, waiter: WebDriverWait):
-    browser.get(LOGIN_ULR)
+async def handle_page_access(browser):
+    tab = await browser.get(LOGIN_ULR)
     
-    waiter.until(
-        expected_conditions.visibility_of_element_located(
-            (By.XPATH, '//*[@id="barra-sso"]')
-        )
-    ).click()
+    """ select = await tab.select('#barra-sso')
+    await select.click() """
     
-    waiter.until(
-        expected_conditions.visibility_of_element_located(
-            (By.XPATH, LOGIN_PAGE_TITLE_XPATH)
-        )
-    )
+    await tab.select('#login-cpf h3')
+    
+    return tab

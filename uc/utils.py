@@ -1,6 +1,6 @@
 import math
 import random
-
+import nodriver
 import undetected_chromedriver as undetected_driver
 from selenium import webdriver
 from selenium.webdriver import Chrome
@@ -21,6 +21,13 @@ def init_undetected_driver(arguments: list[str]):
 
     return browser, waiter
 
+async def init_nodriver():
+    browser = await nodriver.start(
+        headless=False,
+    )
+    
+    return browser
+
 def init_standard_driver(arguments: list[str]):
     webdriver_options = webdriver.ChromeOptions()
 
@@ -32,7 +39,10 @@ def init_standard_driver(arguments: list[str]):
 
     return browser, waiter
 
-def init_web_driver(arguments: list[str], undetected=False):
+async def init_web_driver(arguments: list[str], undetected=False, nodriver=False):
+    if nodriver:
+        return await init_nodriver()
+    
     if undetected:
         return init_undetected_driver(arguments)
 

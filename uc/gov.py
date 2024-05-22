@@ -1,3 +1,4 @@
+import nodriver
 from dotenv import load_dotenv
 from handle_page_access import handle_page_access
 from handle_login import handle_page_login
@@ -7,19 +8,22 @@ from handle_sign import handle_sign
 from utils import init_web_driver
 
 
-def main():
+async def main():
     load_dotenv()
     
-    browser, waiter = init_web_driver([], undetected=True)
+    browser = await init_web_driver([], nodriver=True)
     
     print("Browser initiated sucessfully")
 
-    handle_page_access(browser, waiter)
+    tab = await handle_page_access(browser)
 
-    handle_page_login(browser, waiter)    
+    await handle_page_login(tab)    
     
     #handle_task(browser, waiter)
     
-    handle_sign(browser, waiter)
+    await handle_sign(browser)
     
-main()
+if __name__ == "__main__":
+    # since asyncio.run never worked (for me)
+    # i use
+    nodriver.loop().run_until_complete(main())

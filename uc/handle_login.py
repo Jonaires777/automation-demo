@@ -9,24 +9,21 @@ CONTINUE_BUTTON_XPATH = '//*[@id="enter-account-id"]'
 PASSWORD_INPUT_XPATH = '//*[@id="password"]'
 ENTER_BUTTON_XPATH = '//*[@id="submit-button"]'
 
-def handle_page_login(browser: Chrome, waiter: WebDriverWait):
+async def handle_page_login(tab):
     
-    cpf_input = browser.find_element(By.XPATH, CPF_INPUT_XPATH)
-    cpf_input.send_keys(os.getenv("CPF"))
+    cpf_input = await tab.select('#accountId')
+    await cpf_input.send_keys(os.getenv("CPF"))
     
-    continue_button = browser.find_element(By.XPATH, CONTINUE_BUTTON_XPATH)
-    continue_button.click()
+    continue_button = await tab.select('#enter-account-id')
+    await continue_button.click()
+    
+    password_input = await tab.select('#password')
+    await password_input.send_keys(os.getenv("PASSWORD"))
 
-    waiter.until(
-        expected_conditions.visibility_of_element_located(
-            (By.XPATH, PASSWORD_INPUT_XPATH)
-        )
-    )
-    
-    password_input = browser.find_element(By.XPATH, PASSWORD_INPUT_XPATH)
-    password_input.send_keys(os.getenv("PASSWORD"))
-
-    enter_button = browser.find_element(By.XPATH, ENTER_BUTTON_XPATH)
-    enter_button.click()
+    enter_button = await tab.select('#submit-button')
+    await enter_button.click()
     
     print("Logged successfully")
+    
+    return tab
+    
