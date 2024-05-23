@@ -18,8 +18,8 @@ def main():
 
     handle_page_login(browser, waiter)    
     
-    #handle_task(browser, waiter)
+    handle_task(browser, waiter)
     
-    handle_sign(browser, waiter)
+    #handle_sign(browser, waiter)
     
 main()

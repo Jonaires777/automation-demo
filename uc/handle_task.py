@@ -9,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 MAIN_PAGE_TITLE = '//*[@id="a4c5cb90-2f53-400c-82c0-7a6e2ffbedab"]/div/h2'
 AUTH_INTERACTION = '//*[@id="barra-sso"]'
-GET_CPF = '//*[@id="d8878bf7-f068-4bd0-aa20-283e0508ccad"]/div/div[2]/a[2]'
+GET_CPF = '//*[@id="d8878bf7-f068-4bd0-aa20-283e0508ccad"]/div/div[2]/a[3]'
 CPF_PAGE_TITLE = '//*[@id="content-core"]/div[2]/div[1]/div'
 START_BUTTON = '//*[@id="content-core"]/div[2]/div[1]/a'
 GET_INFORMATION_PAGE_TITLE = '//*[@id="rfb-main-container"]/h2'
@@ -74,22 +74,16 @@ def handle_task(browser: Chrome, waiter: WebDriverWait):
     )
     birthdate_input.send_keys(os.getenv('BIRTHDATE'))
     
-    time.sleep(2)
-    
-    input('Press the chaptcha checkbox to continue!')
-    
-    """ captcha_wrapper = waiter.until(
+    time.sleep(3)
+        
+    hcaptcha = waiter.until(
         expected_conditions.visibility_of_element_located(
-            (By.XPATH, '//*[@id="anchor"]')
+            (By.XPATH, '//*[@id="hcaptcha"]/iframe')
         )
     )
+    hcaptcha.click()
     
-    captcha_checkbox = waiter.until(
-        expected_conditions.visibility_of_element_located(
-            (By.XPATH, '//*[@id="checkbox"]')
-        )
-    )
-    captcha_checkbox.click() """
+    time.sleep(5)
     
     submit_information = waiter.until(
         expected_conditions.visibility_of_element_located(
