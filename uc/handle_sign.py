@@ -16,22 +16,29 @@ CONFIRM_SIGN_BUTTON_XPATH = (
     '//*[@id="dlgAdicionarOutroDocumentoForm"]//span[contains(text(), "Assinar")]'
 )
 
-async def handle_sign(browser, file_path: str = "C:\\Users\\User\\automation-demo\\uc\\7 - metodologia agil.pdf"):
-    tab = await browser.get(SIGN_DOCUMENT_PAGE_URL)
+async def handle_sign(tab, file_path: str = "C:\\Users\\User\\automation-demo\\uc\\7 - metodologia agil.pdf"):
+    await tab.get(SIGN_DOCUMENT_PAGE_URL)
     
-    await tab.select('h1')
+    await tab.select('h1', timeout=30)
     
     print("Sign page accessed successfully")
-
-    file_input = await tab.select('.uploadArquivoClick input[type=file]')
+    
+    choose_archive_button = await tab.select("#resultForm:pn_opcoes button", timeout=30)
+    await choose_archive_button.click()
+    
+    time.sleep(2)
+    
+    file_input = await tab.select('.uploadArquivoClick input[type=file]', timeout=30)
     await file_input.send_keys(file_path)
 
-    send_file_button = await tab.select('#resultForm\:j_idt256')
+    time.sleep(10)
+    
+    send_file_button = await tab.select('#resultForm\:j_idt256', timeout=30)
     await send_file_button.click()
 
     print("File uploaded successfully")
 
-    sign_file_button = await tab.select('#dlgAdicionarOutroDocumentoForm\:j_idt336')
+    sign_file_button = await tab.select('#dlgAdicionarOutroDocumentoForm', timeout=30)
     await sign_file_button.click()
 
     """ confirm_sign_button = browser.find_element(By.XPATH, CONFIRM_SIGN_BUTTON_XPATH)

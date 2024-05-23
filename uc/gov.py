@@ -21,7 +21,7 @@ async def main():
     
     #handle_task(browser, waiter)
     
-    await handle_sign(browser)
+    await handle_sign(tab)
     
 if __name__ == "__main__":
     # since asyncio.run never worked (for me)
