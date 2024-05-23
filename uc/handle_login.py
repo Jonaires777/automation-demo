@@ -25,7 +25,7 @@ async def handle_page_login(tab):
 
     time.sleep(2)
     
-    enter_button = await tab.select('#submit-button')
+    enter_button = await tab.select('#submit-button')   
     await enter_button.click()
     
     print("Logged successfully")
