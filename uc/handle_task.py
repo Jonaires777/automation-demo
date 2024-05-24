@@ -15,6 +15,7 @@ START_BUTTON = '//*[@id="content-core"]/div[2]/div[1]/a'
 GET_INFORMATION_PAGE_TITLE = '//*[@id="rfb-main-container"]/h2'
 CPF_INPUT = '//*[@id="txtCPF"]'
 BIRTHDATE_INPUT = '//*[@id="txtDataNascimento"]'
+HCAPTCHA = '//*[@id="hcaptcha"]/iframe'
 SUBMIT_INFORMATION = '//*[@id="id_submit"]'
 
 def handle_task(browser: Chrome, waiter: WebDriverWait):    
@@ -78,7 +79,7 @@ def handle_task(browser: Chrome, waiter: WebDriverWait):
         
     hcaptcha = waiter.until(
         expected_conditions.visibility_of_element_located(
-            (By.XPATH, '//*[@id="hcaptcha"]/iframe')
+            (By.XPATH, HCAPTCHA)
         )
     )
     hcaptcha.click()
