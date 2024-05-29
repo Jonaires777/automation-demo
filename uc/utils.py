@@ -2,6 +2,7 @@ import math
 import random
 
 import undetected_chromedriver as undetected_driver
+from PIL import Image
 from selenium import webdriver
 from selenium.webdriver import Chrome
 from selenium.webdriver.support.ui import WebDriverWait
@@ -37,3 +38,15 @@ def init_web_driver(arguments: list[str], undetected=False):
         return init_undetected_driver(arguments)
 
     return init_standard_driver(arguments)
+
+def save_page(browser: Chrome, open_screenshot=False):
+    page_id = math.floor(random.random() * 100)
+
+    browser.save_screenshot(f"saved_page_{page_id}.png")
+
+    if open_screenshot:
+        screenshot = Image.open(f"saved_page_{page_id}.png")
+        screenshot.show()
+
+    with open(f"saved_page_{page_id}.html", "w", encoding="utf-8") as file:
+        file.write(browser.page_source)
